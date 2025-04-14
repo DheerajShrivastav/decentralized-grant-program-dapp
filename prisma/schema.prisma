@@ -1,0 +1,25 @@
+// schema.prisma
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // Ensure you have this environment variable set
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Proposal {
+  id              String   @id @default(uuid()) @db.Uuid // Unique identifier
+  title           String   // Title of the proposal
+  description     String   // Description of the proposal
+  requestedAmount Float    // Amount requested for the proposal
+  deliverables    Json     // Deliverables in JSON format
+  status          String   // Status of the proposal (e.g., "pending", "approved", "rejected")
+  stellarAddress  String?  // Stellar address for payouts (optional)
+  createdAt       DateTime @default(now()) // Timestamp of creation
+  aiEvaluation    Json?    // AI evaluation results (optional)
+  votes           Json?    // Votes in JSON format (optional)
+
+  @@map("proposals") // Map the model to the "proposals" table in the database
+}
