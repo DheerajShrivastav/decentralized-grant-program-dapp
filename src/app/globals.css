@@ -1,6 +1,30 @@
 @import "tailwindcss";
 
-:root {
+.events-page {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+body {
+  /* background: #EFEFEF; */
+}
+
+/* .blob2 {
+  display: inline-flex;
+  transform: rotate(-99.302deg);
+  padding: 133.184px 64.059px 161.248px 81.937px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.blob1 {
+  display: inline-flex;
+  padding: 63.476px 64.059px 76.851px 81.937px;
+  justify-content: flex-end;
+  align-items: center;
+} */
+
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -23,4 +47,4 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
+} */
