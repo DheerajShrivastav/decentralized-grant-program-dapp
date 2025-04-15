@@ -67,30 +67,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Events Section */}
-        {/* <section className="py-16 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-3xl font-bold text-gray-800 text-center mb-10">
-              Upcoming Events
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {events.map((event, index) => (
-                <div
-                  key={index}
-                  className="bg-white shadow-lg rounded-xl p-6 border border-gray-200 hover:shadow-2xl transition-shadow duration-300"
-                >
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">
-                    {event.name}
-                  </h3>
-                  <p className="text-gray-500 text-sm mb-4">{event.date}</p>
-                  <p className="text-gray-700">{event.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section> */}
 
-        {/* Call to Action */}
         <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
           <div className="max-w-7xl mx-auto px-6 text-center">
             <h2 className="text-3xl font-bold mb-4">
@@ -105,7 +82,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Footer */}
+
         <footer className="bg-gray-900 text-white py-6">
           <p className="text-center text-sm">
             © Lazy Coders. All rights reserved.
