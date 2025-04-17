@@ -1,33 +1,61 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import { injected } from 'wagmi/connectors';
 import { SignInButton, SignedOut, SignedIn, UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
 
-
 const Navbar = () => {
-    // const { connect } = useConnect({
-    //     connector: new InjectedConnector(),
-    // });
-    const { connect } = useConnect()
+    const { connect } = useConnect();
     const { disconnect } = useDisconnect();
     const { address, isConnected } = useAccount();
+    const [error, setError] = useState<string | null>(null);
+    const [hasWallet, setHasWallet] = useState<boolean | null>(null);
+
+    // Check if wallet is available on component mount
+    useEffect(() => {
+        setHasWallet(typeof window !== 'undefined' && window.ethereum !== undefined);
+    }, []);
+
+    const handleConnect = async () => {
+        try {
+            if (typeof window !== 'undefined' && !window.ethereum) {
+                setError('No wallet extension detected. Please install MetaMask or another wallet extension.');
+                // Error message will disappear after 5 seconds
+                setTimeout(() => setError(null), 5000);
+                return;
+            }
+
+            await connect({ connector: injected() });
+        } catch (err) {
+            console.error('Connection error:', err);
+            setError('Failed to connect wallet. Please try again.');
+            setTimeout(() => setError(null), 5000);
+        }
+    };
 
     return (
         <>
-            <div className="navbarbox flex justify-between bg-[#ffd166] mt-6 rounded-xl items-center shadow-lg">
+            <div className="navbarbox flex justify-between bg-[#ffd166] mt-6 rounded-xl items-center shadow-lg relative">
                 <Link href={'/'} className="py-[15px] px-[30px] text-2xl font-semibold text-black">
                     HackZy
                 </Link>
                 <div className="flex items-center gap-4">
+
+
                     {/* Connect Wallet Button */}
                     {!isConnected ? (
                         <button
-                            onClick={() => connect({ connector: injected() })}
-                            className="bg-[#1d3557] font-semibold px-4 rounded-md py-1.5 text-[#f1faee] shadow-md hover:shadow-lg hover:bg-[#457b9d] transition-all cursor-pointer"
+                            onClick={handleConnect}
+                            className={`font-semibold px-4 rounded-md py-1.5 shadow-md hover:shadow-lg transition-all cursor-pointer flex items-center gap-2 
+                                ${hasWallet === false
+                                    ? "bg-red-600 text-white hover:bg-red-700"
+                                    : "bg-[#1d3557] text-[#f1faee] hover:bg-[#457b9d]"}`}
                         >
-                            Connect Wallet
+                            {hasWallet === false && (
+                                <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-white text-red-600 font-bold">!</span>
+                            )}
+                            {hasWallet === false ? "No Wallet" : "Connect Wallet"}
                         </button>
                     ) : (
                         <div className="flex items-center gap-4">
