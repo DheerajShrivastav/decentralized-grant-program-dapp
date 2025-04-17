@@ -1,7 +1,17 @@
+"use client"
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+
+  const router = useRouter()
+
+  const navigateToDashboard = function () {
+
+    router.push('/host/dashboard')
+
+  }
 
 
   return (
@@ -76,7 +86,7 @@ export default function Home() {
             <p className="text-lg mb-6">
               Join our community and start building the future of decentralized technology.
             </p>
-            <button className="px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition">
+            <button onClick={navigateToDashboard} className="cursor-pointer px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition">
               Join Now
             </button>
           </div>

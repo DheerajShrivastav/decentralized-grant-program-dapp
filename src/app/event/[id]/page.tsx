@@ -38,7 +38,7 @@ const ViewEventsPage = () => {
                         second: "$2,500",
                         third: "$1,000"
                     },
-                    banner: "/images/event1.jpg",
+                    banner: "/images/861.webp",
                     contactName: "Sarah Johnson",
                     contactEmail: "sarah@web3hackathon.com",
                     website: "https://web3hackathon.com",
@@ -114,16 +114,18 @@ const ViewEventsPage = () => {
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Navbar */}
-            <Navbar />
-
+            <div className="mx-10">
+                <Navbar />
+            </div>
             {/* Banner */}
-            <div className="relative h-80 w-full">
+            <div className="mx-10 mt-10 relative h-80 ">
                 <Image
-                    src={event.banner || "/images/default-banner.jpg"}
+                    src={event.banner || "/images/862.webp"}
                     alt={event.title}
                     layout="fill"
                     objectFit="cover"
                     priority
+                    className='rounded'
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
                     <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-8">

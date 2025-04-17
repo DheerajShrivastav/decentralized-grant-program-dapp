@@ -1,7 +1,18 @@
 "use client"
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
+
 const EventCard = ({ event }) => {
+
+    const router = useRouter()
+    const handleView = function () {
+        router.push('/event/id')
+
+
+
+    }
     return (
         <>
             <div
@@ -32,9 +43,11 @@ const EventCard = ({ event }) => {
                         </span>
                         <span className='px-3 text-xs font-semibold rounded-full bg-gray-200 py-1 ml-2'>{event.mode}</span>
                     </div>
-                    <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer">
+                    <button onClick={handleView} className="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer">
                         Apply Now
                     </button>
+
+
                 </div>
             </div>
         </>
