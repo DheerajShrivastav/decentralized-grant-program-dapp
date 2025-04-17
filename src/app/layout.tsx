@@ -6,6 +6,8 @@ import {
 
 } from '@clerk/nextjs'
 
+import { WagmiProviderClient } from '@/components/ClientProvider'
+
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -27,14 +29,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <WagmiProviderClient>
+      <ClerkProvider>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 
-          {children}
-        </body>
-      </html>
-    </ClerkProvider>
+            {children}
+          </body>
+        </html>
+      </ClerkProvider>
+    </WagmiProviderClient>
   )
 }
