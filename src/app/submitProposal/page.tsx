@@ -81,7 +81,7 @@ const SubmitProposal: React.FC = () => {
       }
 
       console.log('Proposal submitted successfully')
-      //   router.push('/proposals') // Use router.push for navigation
+      router.push('/proposals') // Use router.push for navigation
     } catch (error) {
       console.error('Error submitting proposal:', error)
       alert('Failed to submit proposal. Please try again.')
