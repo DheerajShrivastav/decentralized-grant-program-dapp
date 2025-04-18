@@ -1,62 +1,63 @@
-"use client";
+'use client'
 
-import React, { useEffect, useState } from "react";
-import { useRouter, useParams } from "next/navigation";
+import React, { useEffect, useState } from 'react'
+import { useRouter, useParams } from 'next/navigation'
+import { Proposal } from '../../../../../types/index'
 
 const EditProposalPage: React.FC = () => {
-  const [proposal, setProposal] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const router = useRouter();
-  const params = useParams();
+  const [proposal, setProposal] = useState<Proposal | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const router = useRouter()
+  const params = useParams()
 
   useEffect(() => {
     const fetchProposal = async () => {
       try {
-        setLoading(true);
-        const response = await fetch(`/api/proposals/${params.id}`);
+        setLoading(true)
+        const response = await fetch(`/api/proposals/${params.id}`)
         if (!response.ok) {
-          throw new Error("Failed to fetch proposal");
+          throw new Error('Failed to fetch proposal')
         }
-        const data = await response.json();
-        setProposal(data);
+        const data = await response.json()
+        setProposal(data)
       } catch (err) {
-        setError(err.message);
+        setError(err.message)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    fetchProposal();
-  }, [params.id]);
+    fetchProposal()
+  }, [params.id])
 
   const handleSave = async () => {
     try {
       const response = await fetch(`/api/proposals/${params.id}`, {
-        method: "PUT",
+        method: 'PUT',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(proposal),
-      });
+      })
 
       if (!response.ok) {
-        throw new Error("Failed to save proposal");
+        throw new Error('Failed to save proposal')
       }
 
-      router.push("/proposals");
+      router.push('/proposals')
     } catch (err) {
-      console.error(err);
-      alert("Failed to save proposal.");
+      console.error(err)
+      alert('Failed to save proposal.')
     }
-  };
+  }
 
   if (loading) {
-    return <div>Loading proposal...</div>;
+    return <div>Loading proposal...</div>
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>Error: {error}</div>
   }
 
   return (
@@ -64,8 +65,8 @@ const EditProposalPage: React.FC = () => {
       <h1 className="text-2xl font-bold mb-4">Edit Proposal</h1>
       <form
         onSubmit={(e) => {
-          e.preventDefault();
-          handleSave();
+          e.preventDefault()
+          handleSave()
         }}
       >
         <div className="mb-4">
@@ -97,7 +98,7 @@ const EditProposalPage: React.FC = () => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default EditProposalPage;
+export default EditProposalPage
