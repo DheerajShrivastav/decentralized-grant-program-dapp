@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, MapPin, Globe, Users, Tag, AlertCircle, ChevronRight } from 'lucide-react'
@@ -9,6 +10,7 @@ import Navbar from '@/components/Navbar'
 
 const ViewEventsPage = () => {
     const params = useParams();
+    const router = useRouter(); // Initialize the router
     const [event, setEvent] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -82,7 +84,8 @@ const ViewEventsPage = () => {
 
     const handleApply = () => {
         // In a real app, this would submit an application or redirect to an application form
-        alert("Application submitted successfully!");
+        router.push(`/submitProposal`);
+        //alert("Application submitted successfully!");
     };
 
     if (loading) {
