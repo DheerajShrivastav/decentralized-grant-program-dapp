@@ -42,3 +42,20 @@ export async function PUT(
     )
   }
 }
+export async function DELETE(
+  req: Request,
+  { params }: { params: { id: string } }
+) {
+  try {
+    await prisma.proposal.delete({
+      where: { id: params.id },
+    })
+    return NextResponse.json({ message: 'Proposal deleted successfully' })
+  } catch (error) {
+    console.error('Error deleting proposal:', error)
+    return NextResponse.json(
+      { error: 'Failed to delete proposal' },
+      { status: 500 }
+    )
+  }
+}

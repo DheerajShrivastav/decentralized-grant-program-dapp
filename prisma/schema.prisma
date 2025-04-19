@@ -23,3 +23,40 @@ model Proposal {
 
   @@map("proposals") // Map the model to the "proposals" table in the database
 }
+
+model Event {
+  id                   String   @id @default(cuid())
+  title                String
+  description          String
+  startDate           DateTime
+  endDate             DateTime
+  mode                 String
+  type                 String
+  tags                 String[] // Array of strings for tags
+  banner               String
+  contactName          String
+  contactEmail         String
+  website              String
+  location             String?
+  maxParticipants      Int
+  eligibility          String
+  rulesAndGuidelines   String
+  registeredParticipants Int
+  prizes               Prize[]
+  timeline             Timeline[]
+}
+
+model Prize {
+  id      String   @id @default(cuid())
+  title   String   // Title of the prize
+  amount  String   // Store the prize amount as a string (e.g., "$5,000")
+  event   Event?   @relation(fields: [eventId], references: [id])
+  eventId String
+}
+
+model Timeline {
+  id        String   @id @default(cuid())
+  date      DateTime
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id])
+}
