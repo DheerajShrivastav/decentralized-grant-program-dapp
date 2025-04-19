@@ -57,6 +57,7 @@ export async function PUT(
   }: Event = body
 
   try {
+    // Update the event
     const updatedEvent = await prisma.event.update({
       where: { id: params.id },
       data: {
@@ -76,35 +77,44 @@ export async function PUT(
         eligibility,
         rulesAndGuidelines,
         registeredParticipants,
-        timeline: {
-          createMany: {
-            data: timeline.map((item) => ({
-              date: new Date(item.date),
-              event: item.event,
-            })),
-          },
-        },
-        prizes: {
-          createMany: {
-            data: prizes.map((item) => ({
-              title: item.title,
-              amount: item.amount,
-            })),
-          },
-        },
       },
       include: {
         timeline: true, // Include the timeline in the response
+        prizes: true, // Include the prizes in the response
       },
     })
-    if (!updatedEvent) {
-      return NextResponse.json({ error: 'Event not found' }, { status: 404 })
-    }
+
+    // Update timeline entries
+    await prisma.timeline.deleteMany({
+      where: { eventId: params.id }, // Delete existing timeline entries
+    })
+
+    await prisma.timeline.createMany({
+      data: timeline.map((item) => ({
+        date: new Date(item.date),
+        eventId: updatedEvent.id, // Associate with the updated event
+        event: item.event,
+      })),
+    })
+
+    // Update prizes
+    await prisma.prize.deleteMany({
+      where: { eventId: params.id }, // Delete existing prizes
+    })
+
+    await prisma.prize.createMany({
+      data: prizes.map((item) => ({
+        title: item.title,
+        amount: item.amount,
+        eventId: updatedEvent.id, // Associate with the updated event
+      })),
+    })
+
     return NextResponse.json(updatedEvent)
   } catch (error) {
     console.error('Error updating event:', error)
     return NextResponse.json(
-      { error: 'Failed to update event' },
+      { error: 'Failed to update event', details: error },
       { status: 500 }
     )
   }

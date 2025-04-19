@@ -30,7 +30,7 @@ const ViewEventsPage = () => {
 
         // In a real application, you would fetch data from your API
         // For now, we'll simulate a fetch with mock data
-        const response = await fetch(`/api/events/${params.id}`)
+        const response = await fetch(`/api/event/${params.id}`)
         const data: Event = await response.json()
 
         if (!response.ok) {
@@ -55,9 +55,17 @@ const ViewEventsPage = () => {
   }, [params.id])
 
   // Format date to more readable form
-  const formatDate = (date: Date) => {
+  const formatDate = (date: Date | string) => {
+    // Check if date is a string and convert it to a Date object
+    const dateObj = typeof date === 'string' ? new Date(date) : date
+
+    // Check if the date is valid
+    if (isNaN(dateObj.getTime())) {
+      return 'Invalid date' // Handle invalid date
+    }
+
     const options = { year: 'numeric', month: 'long', day: 'numeric' } as const
-    return date.toLocaleDateString('en-US', options)
+    return dateObj.toLocaleDateString('en-US', options)
   }
 
   const handleApply = () => {

@@ -1,7 +1,22 @@
-import type { NextConfig } from "next";
+import { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'assets.example.com',
+        port: '',
+        pathname: '/account123/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '1jhege1xa8.ufs.sh', // Add this line
+        port: '',
+        pathname: '/**', // Adjust the pathname as needed
+      },
+    ],
+  },
+}
 
-export default nextConfig;
+export default nextConfig
