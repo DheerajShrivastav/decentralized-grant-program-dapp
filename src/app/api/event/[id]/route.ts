@@ -9,9 +9,10 @@ export async function GET(
   req: Request,
   { params }: { params: { id: string } }
 ) {
+  const { id } = await params
   try {
     const event = await prisma.event.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         timeline: true,
         prizes: true,

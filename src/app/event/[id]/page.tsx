@@ -117,7 +117,7 @@ const ViewEventsPage = () => {
       {/* Banner */}
       <div className="mx-10 mt-10 relative h-80 ">
         <Image
-          src={event.banner || '/images/862.webp'}
+          src={event.banner}
           alt={event.title}
           layout="fill"
           objectFit="cover"

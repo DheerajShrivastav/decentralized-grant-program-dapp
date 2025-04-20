@@ -18,7 +18,7 @@ const EventCard = ({ event }) => {
       >
         <div className="relative h-40">
           <img
-            src={event.image}
+            src={event.banner}
             alt={event.title}
             className="w-full h-full object-cover"
           />

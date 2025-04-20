@@ -9,34 +9,6 @@ const EventsListingPage = () => {
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState<string | null>(null)
 
-  // const events = [
-  //     {
-  //         title: "Bio x AI Virtual Hackathon",
-  //         date: "Apr 1 - May 11, 2025",
-  //         status: "Live",
-  //         mode: "Offline",
-  //         prize: "$90,000",
-  //         image: "/images/861.webp",
-
-  //     },
-  //     {
-  //         title: "Sui Overflow 2025",
-  //         date: "Apr 1 - May 11, 2025",
-  //         status: "Upcoming",
-  //         mode: "Online",
-  //         prize: "$50,000",
-  //         image: "/images/835.webp",
-  //     },
-  //     {
-  //         title: "Sui Overflow 2025",
-  //         date: "Apr 1 - May 11, 2025",
-  //         status: "Upcoming",
-  //         mode: "Online",
-  //         prize: "$50,000",
-  //         image: "/images/835.webp",
-  //     },
-
-  // ];
   useEffect(() => {
     const fetchEvents = async () => {
       try {
