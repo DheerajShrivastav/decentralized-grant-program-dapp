@@ -7,9 +7,10 @@ export async function GET(
   req: Request,
   { params }: { params: { id: string } }
 ) {
+  const { id } = await params
   try {
     const proposal = await prisma.proposal.findUnique({
-      where: { id: params.id },
+      where: { id },
     })
     if (!proposal) {
       return NextResponse.json({ error: 'Proposal not found' }, { status: 404 })
