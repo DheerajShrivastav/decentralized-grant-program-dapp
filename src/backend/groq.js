@@ -31,15 +31,32 @@ async function fetchProposals() {
 
 async function main() {
   try {
+    const eventId = "your-event-id";
     const chatCompletion = await getGroqChatCompletion()
     // Print the completion returned by the LLM
     console.log('Groq AI Analysis:')
-    console.log(chatCompletion.choices[0]?.message?.content || 'No response')
+    const analysis = chatCompletion.choices[0]?.message?.content || 'No response'
+    console.log(analysis);
+    // Extract the winner from the analysis (you can customize this logic)
+    const winner = extractWinnerFromAnalysis(analysis);
+    console.log("Winner Proposal:", winner);
+
+    if (winner) {
+      await prisma.event.update({
+        where: { id: eventId },
+        data: { winnerProposal: winner },
+      });
+    }
   } catch (error) {
-    console.error('Error analyzing proposals:', error)
+    console.error("Error analyzing proposals:", error);
   }
 }
-
+function extractWinnerFromAnalysis(analysis) {
+  // Implement logic to extract the winner from the Groq AI response
+  // For example, parse the response to find the proposal with the highest score
+  const match = analysis.match(/Proposal (\d+)/);
+  return match ? `Proposal ${match[1]}` : null;
+}
 export async function getGroqChatCompletion() {
   const proposals = await fetchProposals()
 
