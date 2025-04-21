@@ -26,12 +26,15 @@ const CreateNewEvent = () => {
     contactPhone: '',
     website: '',
     location: '',
-    maxParticipants: '',
+    maxParticipants: 0,
     eligibility: '',
     rulesAndGuidelines: '',
+    registeredParticipants: 0, // Initialize registeredParticipants
+    timeline: [] as { date: string; event: string }[], // Timeline events
   })
 
   const [tagInput, setTagInput] = useState('')
+  const [timelineInput, setTimelineInput] = useState({ date: '', event: '' })
   const [previewImage, setPreviewImage] = useState<string | null>(null)
 
   const handleChange = (
@@ -103,14 +106,42 @@ const CreateNewEvent = () => {
     setFormData({ ...formData, prizes: updatedPrizes })
   }
 
+  const handleTimelineChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target
+    setTimelineInput({
+      ...timelineInput,
+      [name]: value,
+    })
+  }
+
+  const handleTimelineAdd = () => {
+    if (timelineInput.date && timelineInput.event) {
+      setFormData({
+        ...formData,
+        timeline: [...formData.timeline, timelineInput],
+      })
+      setTimelineInput({ date: '', event: '' }) // Reset input fields
+    }
+  }
+
+  const handleTimelineRemove = (index: number) => {
+    const updatedTimeline = formData.timeline.filter((_, i) => i !== index)
+    setFormData({ ...formData, timeline: updatedTimeline })
+  }
+
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
 
-    // Prepare form data for submission
     const dataToSubmit = {
       ...formData,
       prizes: formData.prizes.filter((prize) => prize.title || prize.amount), // Filter out empty prizes
       banner: formData.banner ? await uploadImage(formData.banner) : null, // Handle image upload if necessary
+      registeredParticipants: Number(formData.registeredParticipants), // Convert to number
+      maxParticipants: formData.maxParticipants
+        ? Number(formData.maxParticipants)
+        : undefined, // Convert to number, or set to undefined if empty // Include registeredParticipants
     }
 
     try {
@@ -136,7 +167,6 @@ const CreateNewEvent = () => {
 
   const uploadImage = async (file: File) => {
     // Implement your image upload logic here
-    // For example, you might upload the image to a cloud storage service and return the URL
     return 'uploaded_image_url' // Replace with actual uploaded image URL
   }
 
@@ -261,7 +291,6 @@ const CreateNewEvent = () => {
                 <select
                   id="type"
                   name="type"
-                  required
                   value={formData.type}
                   onChange={handleChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -274,29 +303,30 @@ const CreateNewEvent = () => {
                 </select>
               </div>
             </div>
-
-            {formData.mode === 'offline' || formData.mode === 'hybrid' ? (
-              <div className="mb-4">
-                <label
-                  htmlFor="location"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Location *
-                </label>
-                <input
-                  type="text"
-                  id="location"
-                  name="location"
-                  required={
-                    formData.mode === 'offline' || formData.mode === 'hybrid'
-                  }
-                  value={formData.location}
-                  onChange={handleChange}
-                  className="w-full px- 4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Enter event location"
-                />
-              </div>
-            ) : null}
+            <div>
+              {formData.mode === 'offline' || formData.mode === 'hybrid' ? (
+                <div className="mb-4">
+                  <label
+                    htmlFor="location"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Location *
+                  </label>
+                  <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    required={
+                      formData.mode === 'offline' || formData.mode === 'hybrid'
+                    }
+                    value={formData.location}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter event location"
+                  />
+                </div>
+              ) : null}
+            </div>
           </div>
 
           {/* Tags */}
@@ -379,6 +409,80 @@ const CreateNewEvent = () => {
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mt-2"
                     placeholder="Prize Amount"
                   />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Timeline */}
+          <div className="bg-orange-50 p-6 rounded-lg">
+            <h2 className="text-xl font-semibold mb-4">Timeline Events</h2>
+
+            <div className="grid grid -cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label
+                  htmlFor="timelineDate"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Date *
+                </label>
+                <input
+                  type="date"
+                  id="timelineDate"
+                  name="date"
+                  required
+                  value={timelineInput.date}
+                  onChange={handleTimelineChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="timelineEvent"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Event Description *
+                </label>
+                <textarea
+                  id="timelineEvent"
+                  name="event"
+                  required
+                  value={timelineInput.event}
+                  onChange={handleTimelineChange}
+                  rows={2}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Describe the event"
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-between mb-4">
+              <button
+                type="button"
+                onClick={handleTimelineAdd}
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              >
+                Add Timeline Event
+              </button>
+            </div>
+
+            <div className="flex flex-col">
+              {formData.timeline.map((timelineEvent, index) => (
+                <div
+                  key={index}
+                  className="flex justify-between items-center bg-gray-100 p-2 rounded-md mb-2"
+                >
+                  <div>
+                    <strong>{timelineEvent.date}</strong>: {timelineEvent.event}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => handleTimelineRemove(index)}
+                    className="text-red-600 hover:text-red-800"
+                  >
+                    &times;
+                  </button>
                 </div>
               ))}
             </div>
@@ -467,7 +571,7 @@ const CreateNewEvent = () => {
               <div>
                 <label
                   htmlFor="contactPhone"
-                  className="block text-sm font-medium text-gray-700 mb-1"
+                  className="block text -sm font-medium text-gray-700 mb-1"
                 >
                   Contact Phone
                 </label>

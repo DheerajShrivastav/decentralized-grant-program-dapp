@@ -7,7 +7,7 @@ import { Proposal } from '../../../../../types/index'
 const EditProposalPage: React.FC = () => {
   const [proposal, setProposal] = useState<Proposal | null>(null)
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<String | null>(null)
   const router = useRouter()
   const params = useParams()
 
@@ -22,7 +22,7 @@ const EditProposalPage: React.FC = () => {
         const data = await response.json()
         setProposal(data)
       } catch (err) {
-        setError(err.message)
+        setError(err instanceof Error ? err.message : String(err))
       } finally {
         setLoading(false)
       }
@@ -73,9 +73,11 @@ const EditProposalPage: React.FC = () => {
           <label className="block text-sm font-medium">Title</label>
           <input
             type="text"
-            value={proposal.title}
+            value={proposal?.title}
             onChange={(e) =>
-              setProposal({ ...proposal, title: e.target.value })
+              setProposal(
+                proposal ? { ...proposal, title: e.target.value } : null
+              )
             }
             className="w-full border rounded-lg p-2"
           />
@@ -83,9 +85,11 @@ const EditProposalPage: React.FC = () => {
         <div className="mb-4">
           <label className="block text-sm font-medium">Description</label>
           <textarea
-            value={proposal.description}
+            value={proposal?.description || ''}
             onChange={(e) =>
-              setProposal({ ...proposal, description: e.target.value })
+              setProposal(
+                proposal ? { ...proposal, description: e.target.value } : null
+              )
             }
             className="w-full border rounded-lg p-2"
           />
