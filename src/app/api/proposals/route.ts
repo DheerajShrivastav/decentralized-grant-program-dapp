@@ -16,6 +16,12 @@ export async function POST(request: Request) {
   try {
     const proposalData: Omit<Proposal, 'id' | 'createdAt'> =
       await request.json()
+    if (!proposalData.eventId) {
+      return NextResponse.json(
+        { message: 'eventId is required' },
+        { status: 400 }
+      )
+    }
     const newProposal = await storeProposal(proposalData)
     return NextResponse.json(newProposal, { status: 201 })
   } catch (error) {
