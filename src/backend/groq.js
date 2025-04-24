@@ -4,9 +4,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 const groq = new Groq({
-  apiKey:
-    process.env.GROQ_API_KEY ||
-    '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',
+  apiKey: process.env.GROQ_API_KEY,
 })
 
 async function testDatabaseConnection() {
@@ -31,40 +29,45 @@ async function fetchProposals() {
 
 async function main() {
   try {
-    const eventId = "your-event-id";
+    const eventId = 'your-event-id'
     const chatCompletion = await getGroqChatCompletion()
     // Print the completion returned by the LLM
     console.log('Groq AI Analysis:')
-    const analysis = chatCompletion.choices[0]?.message?.content || 'No response'
-    console.log(analysis);
+    const analysis =
+      chatCompletion.choices[0]?.message?.content || 'No response'
+    console.log(analysis)
     // Extract the winner from the analysis (you can customize this logic)
-    const winner = extractWinnerFromAnalysis(analysis);
-    console.log("Winner Proposal:", winner);
+    const winner = extractWinnerFromAnalysis(analysis)
+    console.log('Winner Proposal:', winner)
 
     if (winner) {
       await prisma.event.update({
         where: { id: eventId },
         data: { winnerProposal: winner },
-      });
+      })
     }
   } catch (error) {
-    console.error("Error analyzing proposals:", error);
+    console.error('Error analyzing proposals:', error)
   }
 }
 function extractWinnerFromAnalysis(analysis) {
   // Implement logic to extract the winner from the Groq AI response
   // For example, parse the response to find the proposal with the highest score
-  const match = analysis.match(/Proposal (\d+)/);
-  return match ? `Proposal ${match[1]}` : null;
+  const match = analysis.match(/Proposal (\d+)/)
+  return match ? `Proposal ${match[1]}` : null
 }
 export async function getGroqChatCompletion() {
   const proposals = await fetchProposals()
 
   // Format proposals into a readable string for Groq AI
-  const proposalSummaries = proposals.map(
-    (p, index) =>
-      `Proposal ${index + 1}:\nTitle: ${p.title}\nDescription: ${p.description}\nRequested Amount: $${p.requestedAmount}\n`
-  ).join('\n')
+  const proposalSummaries = proposals
+    .map(
+      (p, index) =>
+        `Proposal ${index + 1}:\nTitle: ${p.title}\nDescription: ${
+          p.description
+        }\nRequested Amount: $${p.requestedAmount}\n`
+    )
+    .join('\n')
 
   return groq.chat.completions.create({
     messages: [

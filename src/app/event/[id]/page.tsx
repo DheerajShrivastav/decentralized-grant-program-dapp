@@ -69,9 +69,10 @@ const ViewEventsPage = () => {
   }
 
   const handleApply = () => {
-    // In a real app, this would submit an application or redirect to an application form
-    router.push(`/submitProposal`)
-    //alert("Application submitted successfully!");
+    router.push(`/submitProposal/${params.id}`)
+  }
+  const handleViewProposals = () => {
+    router.push(`/event/${params.id}/proposals`)
   }
 
   if (loading) {
@@ -164,6 +165,13 @@ const ViewEventsPage = () => {
                 </div>
               </div>
 
+              <button
+                onClick={handleViewProposals}
+                className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition flex items-center gap-2"
+              >
+                View Proposals
+                <ChevronRight size={18} />
+              </button>
               <button
                 onClick={handleApply}
                 className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition flex items-center gap-2"
