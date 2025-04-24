@@ -15,6 +15,7 @@ export async function storeProposal(
       status: proposal.status,
       stellarAddress: proposal.stellarAddress,
       createdAt: new Date(), // Set createdAt to the current date
+      eventId: proposal.eventId, // Assuming eventId is part of the proposal
     },
   })
 
@@ -80,5 +81,6 @@ function transformProposal(row: any): Proposal {
     createdAt: row.createdAt,
     aiEvaluation: row.aiEvaluation,
     votes: row.votes,
+    eventId: row.eventId,
   }
 }

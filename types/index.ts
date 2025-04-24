@@ -39,6 +39,7 @@ export interface Proposal {
   createdAt: Date // Timestamp of creation
   aiEvaluation?: AIEvaluation // Optional AI evaluation results
   votes?: Votes // Optional votes
+  eventId: string // ID of the event associated with the proposal
 }
 
 // Type for User
@@ -122,4 +123,5 @@ export type Event = {
   rulesAndGuidelines: string
   registeredParticipants: number
   timeline: TimelineEvent[] // Array of timeline events
+  proposals: Proposal[] // Array of proposals associated with the event
 }
