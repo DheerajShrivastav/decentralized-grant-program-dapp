@@ -18,10 +18,11 @@ model Proposal {
   status          String   // Status of the proposal (e.g., "pending", "approved", "rejected")
   stellarAddress  String?  // Stellar address for payouts (optional)
   createdAt       DateTime @default(now()) // Timestamp of creation
+  updatedAt       DateTime @updatedAt @default(now())// Timestamp of last update
   aiEvaluation    Json?    // AI evaluation results (optional)
   votes           Json?    // Votes in JSON format (optional)
-  eventId         String   // Foreign key to the Event model
-  event          Event    @relation(fields: [eventId], references: [id]) // Relation to the Event model
+  eventId         String?   // Foreign key to the Event model
+  event           Event?    @relation(fields: [eventId], references: [id]) // Relation to the Event model
 
   @@map("proposals") // Map the model to the "proposals" table in the database
 }
@@ -48,7 +49,8 @@ model Event {
   timeline             Timeline[]
   proposals            Proposal[]
   createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
+  updatedAt            DateTime @updatedAt @default(now())
+  status              String?
 }
 
 model Prize {
