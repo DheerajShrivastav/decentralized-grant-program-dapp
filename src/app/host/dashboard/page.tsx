@@ -19,7 +19,7 @@ const HostDashboard = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [filter, setFilter] = useState('all')
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
+  const [error, setError] = useState<String | null>('')
 
   useEffect(() => {
     const fetchEvents = async () => {

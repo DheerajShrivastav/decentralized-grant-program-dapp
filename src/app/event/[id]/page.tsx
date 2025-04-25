@@ -71,9 +71,6 @@ const ViewEventsPage = () => {
   const handleApply = () => {
     router.push(`/submitProposal/${params.id}`)
   }
-  const handleViewProposals = () => {
-    router.push(`/event/${params.id}/proposals`)
-  }
 
   if (loading) {
     return (
@@ -165,13 +162,6 @@ const ViewEventsPage = () => {
                 </div>
               </div>
 
-              <button
-                onClick={handleViewProposals}
-                className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition flex items-center gap-2"
-              >
-                View Proposals
-                <ChevronRight size={18} />
-              </button>
               <button
                 onClick={handleApply}
                 className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition flex items-center gap-2"
