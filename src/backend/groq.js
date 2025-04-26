@@ -23,10 +23,20 @@ async function fetchProposals() {
       title: true,
       description: true,
       requestedAmount: true,
+      votes: true,
     },
   })
 }
 
+async function fetchEventDetails(eventId) {
+  return await prisma.event.findUnique({
+    where: { id: eventId },
+    select: {
+      title: true,
+      description: true,
+    },
+  });
+}
 async function main() {
   try {
     const eventId = 'your-event-id'
@@ -52,28 +62,32 @@ async function main() {
 }
 function extractWinnerFromAnalysis(analysis) {
   // Implement logic to extract the winner from the Groq AI response
-  // For example, parse the response to find the proposal with the highest score
   const match = analysis.match(/Proposal (\d+)/)
   return match ? `Proposal ${match[1]}` : null
 }
 export async function getGroqChatCompletion() {
   const proposals = await fetchProposals()
+  const event = await fetchEventDetails(eventId);
 
-  // Format proposals into a readable string for Groq AI
-  const proposalSummaries = proposals
-    .map(
-      (p, index) =>
-        `Proposal ${index + 1}:\nTitle: ${p.title}\nDescription: ${
-          p.description
-        }\nRequested Amount: $${p.requestedAmount}\n`
-    )
-    .join('\n')
+  if (!event) {
+    throw new Error('Event not found');
+  }
+
+ // Format event details and proposals into a readable string for Groq AI
+ const eventDetails = `Event Title: ${event.title}\nDescription: ${event.description}\n`;
+ const proposalSummaries = proposals
+   .map(
+     (p, index) =>
+       `Proposal ${index + 1}:\nTitle: ${p.title}\nDescription: ${p.description}\nRequested Amount: $${p.requestedAmount}\nVotes: ${p.votes || 0}\n`
+   )
+   .join('\n');
+  const content = `Analyze the following event and proposals. Based on the event's title and description, determine which proposal aligns most closely with the event and has the highest votes:\n\n${eventDetails}\nProposals:\n${proposalSummaries}`;
 
   return groq.chat.completions.create({
     messages: [
       {
         role: 'user',
-        content: `Analyze the following proposals and provide insights:\n\n${proposalSummaries}`,
+        content,
       },
     ],
     model: 'llama-3.3-70b-versatile',
