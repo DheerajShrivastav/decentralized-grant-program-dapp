@@ -1,4 +1,4 @@
-![github-submission-banner](https://github.com/https://github.com/DheerajShrivastav/decentralized-grant-program-dapp/public/banner.png)
+![github-submission-banner](https://i.imgur.com/26AFpmu.png)
 
 # 🚀 Event Horizon
 
