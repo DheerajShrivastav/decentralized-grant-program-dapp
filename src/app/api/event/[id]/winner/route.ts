@@ -3,23 +3,29 @@ import { NextResponse } from 'next/server'
 
 const prisma = new PrismaClient()
 
-// Get winner proposal by event ID
 export async function GET(
   req: Request,
   { params }: { params: { id: string } }
 ) {
-  const { id } = await params // Correctly access params.id
+  const { id } = params
   try {
-    // Fetch the event with the winner proposal
     const event = await prisma.event.findUnique({
       where: { id },
       include: {
-        proposals: true, // Include proposals to access the winner proposal
+        proposals: true,
       },
     })
 
     if (!event || !event.winnerProposal) {
       return NextResponse.json({ error: 'Winner not found' }, { status: 404 })
+    }
+
+    // Check if winnerProposal is a valid UUID
+    if (typeof event.winnerProposal !== 'string') {
+      return NextResponse.json(
+        { error: 'Winner proposal ID is invalid' },
+        { status: 400 }
+      )
     }
 
     // Fetch the winner proposal details

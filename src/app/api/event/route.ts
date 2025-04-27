@@ -1,5 +1,3 @@
-// routes.ts
-
 import { PrismaClient } from '@prisma/client'
 import { Event } from '../../../../types/index' // Import the Event type
 import { NextResponse } from 'next/server'
@@ -38,6 +36,9 @@ export async function POST(req: Request) {
       )
     }
 
+    // Convert maxParticipants to an integer
+    const maxParticipantsInt = maxParticipants ?? null
+
     const newEvent = await prisma.event.create({
       data: {
         title,
@@ -52,13 +53,14 @@ export async function POST(req: Request) {
         contactEmail,
         website: website || '',
         location: location || '', // Optional field
-        maxParticipants,
+        maxParticipants: maxParticipantsInt, // Use the converted integer
         eligibility,
         rulesAndGuidelines,
         registeredParticipants,
         timeline: {
           create: timeline.map((t) => ({
             date: new Date(t.date),
+            // description: t.description, // Include description if needed
           })),
         },
         prizes: {
@@ -85,7 +87,7 @@ export async function POST(req: Request) {
 }
 
 // View all events
-export async function GET(req: Request, res: Response) {
+export async function GET(req: Request) {
   try {
     const events = await prisma.event.findMany({
       include: {
