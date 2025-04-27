@@ -65,7 +65,7 @@ const EvaluateProposal = ({ eventId }: { eventId: String }) => {
 
       const result = await response.json()
       console.log('Evaluation submitted successfully:', result)
-      router.push('/events') // Redirect after successful evaluation
+      router.push(`/event/${id}/winner`) // Redirect after successful evaluation
     } catch (error) {
       console.error('Error submitting evaluation:', error)
     }
