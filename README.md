@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+![github-submission-banner](https://i.imgur.com/26AFpmu.png)
 
-## Getting Started
+# 🚀 Event Horizon
 
-First, run the development server:
+> Discovering New Possibilities in Event Management.
 
+---
+
+## 📌 Problem Statement
+
+Select the problem statement number and title from the official list given in Participant Manual.
+
+**Example:**  
+**Problem Statement 7 – Transform the Future of Rural Commerce**
+
+---
+
+## 🎯 Objective
+
+What problem does your project solve, and who does it serve?  
+
+Our app solves the problem of evaluating proposals of Hackathon events using AI and processing the reward in one click using crypto and blockchain
+
+---
+
+## 🧠 Team & Approach
+
+### Team Name:  
+`Lazy-coder`
+
+### Team Members:  
+- Dheeraj Shrivastav   
+- Abhay Vishwakarma
+- Shubham Singh Sugara
+
+
+### Your Approach:  
+- We wanted to solve the time taking and stressfull task of evaluting the proposals that were submitted by the participants in a hackathon. 
+- The key challenges we faced were the AI integration part and the smart contract part to process payment.
+
+
+---
+
+## 🛠️ Tech Stack
+
+### Core Technologies Used:
+- Frontend: NextJS, TailwindCSS
+- Backend: NextJS
+- Database: Postgress
+- APIs: Groq
+- Hosting: 
+
+### Sponsor Technologies Used (if any):
+- [✅] **Groq:** _We used Groq to evaluate the proposals_
+- [✅] **Base:** _AgentKit / OnchainKit / Smart Wallet usage_
+
+
+## ✨ Key Features
+
+Highlight the most important features of your project:
+
+- ✅ Event Hosting  
+- ✅ Event Management  
+- ✅ AI Proposal Evaluation  
+- ✅ Bulk Crypto Payment Processing  
+
+
+---
+
+## 📽️ Demo & Deliverables
+
+- **Demo Video Link:** [https://drive.google.com/file/d/1mvchW_wrB3VUWqao5qXtY8XprxqTS5OI/view?usp=sharing]  
+
+---
+
+## ✅ Tasks & Bonus Checklist
+
+- [✅] **All members of the team completed the mandatory task - Followed at least 2 of our social channels and filled the form** (Details in Participant Manual)  
+- [✅] **All members of the team completed Bonus Task 1 - Sharing of Badges and filled the form (2 points)**  (Details in Participant Manual)
+- [✅] **All members of the team completed Bonus Task 2 - Signing up for Sprint.dev and filled the form (3 points)**  (Details in Participant Manual)
+
+
+
+---
+
+## 🧪 How to Run the Project
+
+### Requirements:
+- Node.js
+- API Keys (groq)
+- .env file setup (if needed)
+
+### Local Setup:
 ```bash
+# Clone the repo
+git clone https://github.com/DheerajShrivastav/decentralized-grant-program-dapp
+
+# Install dependencies
+cd decentralized-grant-program-dapp
+npm install
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧬 Future Scope
 
-To learn more about Next.js, take a look at the following resources:
+List improvements, extensions, or follow-up features:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 📈 More integrations  
+- 🛡️ Security enhancements  
+- 🌐 More language support  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🏁 Final Words
+
+It was fun joining this hackathon, we got to learn how to collaborate in team and develop a whole new product in a time bound period.
+
+---
