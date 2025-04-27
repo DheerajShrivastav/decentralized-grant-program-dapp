@@ -18,7 +18,8 @@ Select the problem statement number and title from the official list given in Pa
 ## 🎯 Objective
 
 What problem does your project solve, and who does it serve?  
-Briefly describe the real-world use case and the value it provides.
+
+Our app solves the problem of evaluating proposals of Hackathon events using AI and processing the reward in one click using crypto and blockchain
 
 ---
 
@@ -28,72 +29,65 @@ Briefly describe the real-world use case and the value it provides.
 `Lazy-coder`
 
 ### Team Members:  
-- Name 1 (GitHub / LinkedIn / Role)  
-- Name 2  
-- Name 3  
-*(Add links if you want)*
+- Dheeraj Shrivastav   
+- Abhay Vishwakarma
+- Shubham Singh Sugara
+
 
 ### Your Approach:  
-- Why you chose this problem  
-- Key challenges you addressed  
-- Any pivots, brainstorms, or breakthroughs during hacking  
+- We wanted to solve the time taking and stressfull task of evaluting the proposals that were submitted by the participants in a hackathon. 
+- The key challenges we faced were the AI integration part and the smart contract part to process payment.
+
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Core Technologies Used:
-- Frontend:
-- Backend:
-- Database:
-- APIs:
-- Hosting:
+- Frontend: NextJS, TailwindCSS
+- Backend: NextJS
+- Database: Postgress
+- APIs: Groq
+- Hosting: 
 
 ### Sponsor Technologies Used (if any):
-- [ ] **Groq:** _How you used Groq_  
-- [ ] **Monad:** _Your blockchain implementation_  
-- [ ] **Fluvio:** _Real-time data handling_  
-- [ ] **Base:** _AgentKit / OnchainKit / Smart Wallet usage_  
-- [ ] **Screenpipe:** _Screen-based analytics or workflows_  
-- [ ] **Stellar:** _Payments, identity, or token usage_
-*(Mark with ✅ if completed)*
----
+- [✅] **Groq:** _We used Groq to evaluate the proposals_
+- [✅] **Base:** _AgentKit / OnchainKit / Smart Wallet usage_
+
 
 ## ✨ Key Features
 
 Highlight the most important features of your project:
 
-- ✅ Feature 1  
-- ✅ Feature 2  
-- ✅ Feature 3  
-- ✅ Feature 4  
+- ✅ Event Hosting  
+- ✅ Event Management  
+- ✅ AI Proposal Evaluation  
+- ✅ Bulk Crypto Payment Processing  
 
-Add images, GIFs, or screenshots if helpful!
 
 ---
 
 ## 📽️ Demo & Deliverables
 
-- **Demo Video Link:** [Paste YouTube or Loom link here]  
-- **Pitch Deck / PPT Link:** [Paste Google Slides / PDF link here]  
+- **Demo Video Link:** [https://drive.google.com/file/d/1mvchW_wrB3VUWqao5qXtY8XprxqTS5OI/view?usp=sharing]  
 
 ---
 
 ## ✅ Tasks & Bonus Checklist
 
-- [ ] **All members of the team completed the mandatory task - Followed at least 2 of our social channels and filled the form** (Details in Participant Manual)  
-- [ ] **All members of the team completed Bonus Task 1 - Sharing of Badges and filled the form (2 points)**  (Details in Participant Manual)
-- [ ] **All members of the team completed Bonus Task 2 - Signing up for Sprint.dev and filled the form (3 points)**  (Details in Participant Manual)
+- [✅] **All members of the team completed the mandatory task - Followed at least 2 of our social channels and filled the form** (Details in Participant Manual)  
+- [✅] **All members of the team completed Bonus Task 1 - Sharing of Badges and filled the form (2 points)**  (Details in Participant Manual)
+- [✅] **All members of the team completed Bonus Task 2 - Signing up for Sprint.dev and filled the form (3 points)**  (Details in Participant Manual)
 
-*(Mark with ✅ if completed)*
+
 
 ---
 
 ## 🧪 How to Run the Project
 
 ### Requirements:
-- Node.js / Python / Docker / etc.
-- API Keys (if any)
+- Node.js
+- API Keys (groq)
 - .env file setup (if needed)
 
 ### Local Setup:
@@ -109,7 +103,7 @@ npm install
 npm run dev
 ```
 
-Provide any backend/frontend split or environment setup notes here.
+
 
 ---
 
@@ -119,20 +113,15 @@ List improvements, extensions, or follow-up features:
 
 - 📈 More integrations  
 - 🛡️ Security enhancements  
-- 🌐 Localization / broader accessibility  
+- 🌐 More language support  
 
 ---
 
-## 📎 Resources / Credits
-
-- APIs or datasets used  
-- Open source libraries or tools referenced  
-- Acknowledgements  
 
 ---
 
 ## 🏁 Final Words
 
-Share your hackathon journey — challenges, learnings, fun moments, or shout-outs!
+It was fun joining this hackathon, we got to learn how to collaborate in team and develop a whole new product in a time bound period.
 
 ---
