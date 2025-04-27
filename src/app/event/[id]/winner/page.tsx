@@ -2,15 +2,20 @@
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { Proposal } from '../../../../../types'
+import { useRouter } from 'next/navigation'
 
 const WinnerPage = () => {
   const params = useParams() // Get the event ID from the URL
+  const router = useRouter()
   const [winnerData, setWinnerData] = useState<{
     eventTitle: string
     winner: Proposal
   } | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const handleclick = async () => {
+    router.push(`/event/${params.id}/distributeGrant`)
+  }
 
   useEffect(() => {
     const fetchWinner = async () => {
@@ -71,6 +76,18 @@ const WinnerPage = () => {
             Requested Amount: ${winnerData.winner.requestedAmount}
           </p>
           <p className="mt-2">Event Title: {winnerData.eventTitle}</p>
+        </div>
+        <div className="mt-8">
+          <h3 className="text-lg font-semibold">Distribute Grant</h3>
+          <p className="mt-2">
+            You can distribute the grant amount to the winner proposal.
+          </p>
+          <button
+            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg"
+            onClick={() => handleclick()}
+          >
+            Distribute Grant
+          </button>
         </div>
       </div>
     </div>

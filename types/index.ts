@@ -124,4 +124,5 @@ export type Event = {
   registeredParticipants: number
   timeline: TimelineEvent[] // Array of timeline events
   proposals: Proposal[] // Array of proposals associated with the event
+  winnerProposal?: String
 }
