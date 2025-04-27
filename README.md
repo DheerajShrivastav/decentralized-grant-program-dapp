@@ -8,10 +8,8 @@
 
 ## 📌 Problem Statement
 
-Select the problem statement number and title from the official list given in Participant Manual.
 
-**Example:**  
-**Problem Statement 7 – Transform the Future of Rural Commerce**
+**Problem Statement 4 – Craft the Future of Onchain Consumer Experiences with Base**
 
 ---
 
@@ -45,10 +43,10 @@ Our app solves the problem of evaluating proposals of Hackathon events using AI 
 
 ### Core Technologies Used:
 - Frontend: NextJS, TailwindCSS
-- Backend: NextJS
+- Backend: NextJS, solidity
 - Database: Postgress
 - APIs: Groq
-- Hosting: 
+- Hosting: vercel
 
 ### Sponsor Technologies Used (if any):
 - [✅] **Groq:** _We used Groq to evaluate the proposals_
@@ -71,6 +69,8 @@ Highlight the most important features of your project:
 
 - **Demo Video Link:** [https://drive.google.com/file/d/1mvchW_wrB3VUWqao5qXtY8XprxqTS5OI/view?usp=sharing]  
 
+- **Smart Contract Address:** 0x1C1E330B1e2959f43e375290A55655bf9eb24361 (testnet)
+
 ---
 
 ## ✅ Tasks & Bonus Checklist
@@ -88,7 +88,25 @@ Highlight the most important features of your project:
 ### Requirements:
 - Node.js
 - API Keys (groq)
-- .env file setup (if needed)
+- .env file setup:
+
+```
+GROQ_API_KEY=
+
+# Postgres DB 
+DATABASE_URL = 
+
+# auth 
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+
+# Smart Contract
+PRIVATE_KEY=
+
+NEXT_PUBLIC_CONTRACT_ADDRESS=
+
+```
+
 
 ### Local Setup:
 ```bash
